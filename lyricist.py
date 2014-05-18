@@ -1,18 +1,24 @@
 import os
 import commands
 import dbus
+import urllib
+import re
+
+def nopunc(s):
+    return ''.join(e for e in s if e.isalnum())
 
 def getSong():
 	"""Grabs the currently playing song from Banshee"""
 	Artist = os.popen('banshee --query-artist').readline().replace('artist: ', '').replace('\n', '')
 	Title = os.popen('banshee --query-title').readline().replace('title: ', '').replace('\n', '')
-	song = "%s - %s" % (artist, title)
+	song = [Artist,Title]
 	return song
 
 def getLyrics():
 	song = getSong()
-	
-	Artist =
+	Artist = song[0]
+	Title = song[1]
+
 	artist = nopunc(Artist.replace('The', '')).lower()
 	title = nopunc(Title).lower()
 
