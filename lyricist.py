@@ -4,6 +4,7 @@ import dbus
 import urllib
 import re
 import time
+import sys
 
 def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
@@ -35,8 +36,9 @@ def getLyrics(song):
 	
 	lyrics = cleanupLyrics(lyrics) 
 
-	print "{0} by {1}".format(Title, Artist)
+	generateTitle(Title, Artist)
 	print lyrics
+
 
 def cleanupLyrics(lyrics):
 	"""Cleans up lyrics"""
@@ -44,6 +46,14 @@ def cleanupLyrics(lyrics):
 	# remove HTML tags
 	lyrics = re.sub('<.*?>', '', lyrics)
 	return lyrics
+
+def generateTitle(Title, Artist):
+	"""Generates a title for the lyrics"""
+	title = "{0} by {1}".format(Title, Artist)
+	print title
+	
+	for characters in title:
+		sys.stdout.write('-')		
 
 song = getSong()
 getLyrics(song)
