@@ -48,5 +48,7 @@ def cleanupLyrics(lyrics):
 song = getSong()
 getLyrics(song)
 while True:
-	if song != getSong(): getLyrics(song)
+	if song != getSong():
+		song = getSong() 
+		getLyrics(song)
 	time.sleep(1)
