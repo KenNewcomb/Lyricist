@@ -3,6 +3,7 @@ import commands
 import dbus
 import urllib
 import re
+import time
 
 def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
@@ -14,11 +15,10 @@ def getSong():
 	song = [Artist,Title]
 	return song
 
-def getLyrics():
-	song = getSong()
+def getLyrics(song):
+	"""Fetches the lyrics from the internet"""
 	Artist = song[0]
 	Title = song[1]
-
 	artist = nopunc(Artist.replace('The', '')).lower()
 	title = nopunc(Title).lower()
 
@@ -27,19 +27,26 @@ def getLyrics():
 	# get the HTML at the proper URL
 	lyricsf = urllib.urlopen(urlstring)
 
-	# clean up the HTML file
 	try:
-		lyrics = lyricsf.read().split('<!-- start of lyrics -->')[1]
+		 lyrics = lyricsf.read().split('<!-- start of lyrics -->')[1]
 	except IndexError:
 		print "Sorry, no lyrics were found."
 		return
-        
-	lyrics = lyrics.split('<!-- end of lyrics -->')[0]
-	# remove HTML tags
-	lyrics = re.sub('<.*?>', '', lyrics)
+	
+	lyrics = cleanupLyrics(lyrics) 
 
 	print "{0} by {1}".format(Title, Artist)
 	print lyrics
 
+def cleanupLyrics(lyrics):
+	"""Cleans up lyrics"""
+	lyrics = lyrics.split('<!-- end of lyrics -->')[0]
+	# remove HTML tags
+	lyrics = re.sub('<.*?>', '', lyrics)
+	return lyrics
 
-getLyrics()
+song = getSong()
+getLyrics(song)
+while True:
+	if song != getSong(): getLyrics(song)
+	time.sleep(1)
