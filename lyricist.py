@@ -18,47 +18,54 @@ def getSong():
 
 def getLyrics(song):
 	"""Fetches the lyrics from the internet"""
+	# Prepare Artist and Title for lyrics query.
 	Artist = song[0]
 	Title = song[1]
 	artist = nopunc(Artist.replace('The', '')).lower()
 	title = nopunc(Title).lower()
+	
+	AZLyrics(artist, title)
 
+def AZLyrics(artist, title):
 	# construct the lyrics URL
 	urlstring = "http://www.azlyrics.com/lyrics/{0}/{1}.html".format(artist, title)
 	# get the HTML at the proper URL
-	lyricsf = urllib.urlopen(urlstring)
+	lyrics = urllib.urlopen(urlstring)
 
 	try:
-		 lyrics = lyricsf.read().split('<!-- start of lyrics -->')[1]
+		raw_lyrics = lyrics.read().split('<!-- start of lyrics -->')[1]
 	except IndexError:
-		print "Sorry, no lyrics were found."
-		return
+		print "AZLyrics: No lyrics found..."
+		return false
 	
-	lyrics = cleanupLyrics(lyrics) 
+	raw_lyrics = raw_lyrics.split('<!-- end of lyrics -->')[0]
+	
+	processed_lyrics = cleanLyrics(raw_lyrics) 
 
-	generateTitle(Title, Artist)
-	print lyrics
+	print processed_lyrics
+	return True
 
 
-def cleanupLyrics(lyrics):
-	"""Cleans up lyrics"""
-	lyrics = lyrics.split('<!-- end of lyrics -->')[0]
+def cleanLyrics(lyrics):
+	"""Cleans up lyrics, removing HTML tags"""
 	# remove HTML tags
 	lyrics = re.sub('<.*?>', '', lyrics)
 	return lyrics
-
-def generateTitle(Title, Artist):
-	"""Generates a title for the lyrics"""
+	
+	
 	title = "{0} by {1}".format(Title, Artist)
 	print title
 	
 	for characters in title:
 		sys.stdout.write('-')		
 
+# Program Start:
 song = getSong()
 getLyrics(song)
+
 while True:
 	if song != getSong():
 		song = getSong() 
-		getLyrics(song)
+		raw_lyrics = getLyrics(song)
+		processed_lyrics = cleanLyrics(raw_lyrics)
 	time.sleep(1)
