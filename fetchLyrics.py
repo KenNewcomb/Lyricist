@@ -30,13 +30,14 @@ def AZLyrics(song):
 	try:
 		raw_lyrics = lyrics.read().split('<!-- start of lyrics -->')[1]
 	except IndexError:
-		print "AZLyrics: No lyrics found..."
+		print "AZLyrics: No lyrics found...\n"
 		return False
 	
-	raw_lyrics = raw_lyrics.split('<!-- end of lyrics -->')[0]
+	lyrics = raw_lyrics.split('<!-- end of lyrics -->')[0]
 	
-	processed_lyrics = re.sub('<.*?>', '', rawlyrics)
-
+	processed_lyrics = re.sub('<.*?>', '', lyrics)
+	
+	generateTitle(song)
 	print processed_lyrics
 	return True
 
@@ -54,12 +55,12 @@ def SongLyrics(song):
 	try:
 		raw_lyrics = lyrics.read().split("<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">")[1]
 	except IndexError:
-		print "SongLyrics: No lyrics found..."
+		print "SongLyrics: No lyrics found...\n"
 		return False
 
-	raw_lyrics = raw_lyrics.split("</div>")[0]
+	lyrics = raw_lyrics.split("</div>")[0]
 	
-	processed_lyrics = re.sub('<.*?>', '', raw_lyrics)
+	processed_lyrics = re.sub("<.*?>", "", lyrics).replace("&#039;", "'")
 	
 	generateTitle(song)
 	print processed_lyrics
