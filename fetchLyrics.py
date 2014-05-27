@@ -60,16 +60,14 @@ def SongLyrics(song):
 	raw_lyrics = raw_lyrics.split("</div>")[0]
 	
 	processed_lyrics = re.sub('<.*?>', '', raw_lyrics)
-
+	
+	generateTitle(song)
 	print processed_lyrics
 	return True
 
-def cleanLyrics(lyrics):
-	"""Cleans up lyrics, removing HTML tags"""
-	# remove HTML tags
-	lyrics = re.sub('<.*?>', '', lyrics)
-	return lyrics
-	
+def generateTitle(song):
+	Artist = song[0]
+	Title = song[1]
 	
 	title = "{0} by {1}".format(Title, Artist)
 	print title
@@ -77,3 +75,4 @@ def cleanLyrics(lyrics):
 	for characters in title:
 		sys.stdout.write('-')		
 
+	print "\n"
