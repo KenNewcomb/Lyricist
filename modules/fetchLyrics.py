@@ -6,9 +6,6 @@ import re
 import time
 import sys
 
-def nopunc(s):
-    return ''.join(e for e in s if e.isalnum())
-
 def getLyrics(song):
 	"""Attempts to gather lyrics from various sources."""
 	if(AZLyrics(song) != True):
@@ -76,3 +73,5 @@ def generateTitle(song):
 		sys.stdout.write('-')		
 
 	print "\n"
+def nopunc(s):
+    return ''.join(e for e in s if e.isalnum())

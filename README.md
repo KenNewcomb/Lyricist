@@ -22,4 +22,4 @@ To be implemented:
 
 Known bugs:
 -----------
-- SongLyrics.com often gives a blank "page" of lyrics. This is in contrast with their "No Lyrics Found" page, which the program correctly handles. The program outputs a series of spaces. This could be fixed by checking for alphanumeric characters in the lyrics output.
+- SongLyrics.com often gives a blank "page" of lyrics. This is in contrast with their "No Lyrics Found" page, which the program correctly handles. The program outputs a series of spaces. This bug will be further investigated.
