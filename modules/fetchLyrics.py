@@ -32,9 +32,9 @@ def AZLyrics(song):
 	
 	lyrics = raw_lyrics.split('<!-- end of lyrics -->')[0]
 	
-	processed_lyrics = re.sub('<.*?>', '', lyrics)
-	
+	processed_lyrics = re.sub('<.*?>', '', lyrics)	
 	generateTitle(song)
+
 	print processed_lyrics
 	return True
 
