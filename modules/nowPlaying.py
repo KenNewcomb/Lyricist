@@ -1,7 +1,6 @@
 import os
 import commands
 import dbus
-import urllib
 import re
 import sys
 
