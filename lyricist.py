@@ -5,8 +5,9 @@ from modules import fetchLyrics
 # If parameters are given "python lyricist.py "red hot chili peppers" "under the bridge"
 
 if(len(sys.argv) >= 2):
-                Artist = sys.argv[0]
-		Title = sys.argv[1]
+                Artist = sys.argv[1]
+		Title = sys.argv[2]
+		print(Artist, Title)
 		fetchLyrics.getLyrics([Artist,Title])
 else:
 	song = nowPlaying.getSong()
