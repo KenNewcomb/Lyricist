@@ -1,14 +1,17 @@
 import time
 import sys
 from modules import nowPlaying
-from modules import fetchLyrics	
-# If parameters are given "python lyricist.py "red hot chili peppers" "under the bridge"
+from modules import fetchLyrics
+# If parameters are given, search for lyrics. "python lyricist.py "red hot chili peppers" "under the bridge"
 
 if(len(sys.argv) >= 2):
                 Artist = sys.argv[1]
 		Title = sys.argv[2]
 		print(Artist, Title)
 		fetchLyrics.getLyrics([Artist,Title])
+
+# If no parameters are given, get current song from operating system.
+
 else:
 	song = nowPlaying.getSong()
 	fetchLyrics.getLyrics(song)

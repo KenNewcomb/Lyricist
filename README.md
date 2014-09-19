@@ -5,6 +5,8 @@ Lyricist displays the lyrics of the currently playing song in <a href="http://en
 
 News
 ----
+**09.15.14** - Development has resumed.
+
 **05.26.14** - SongLyrics.com is now supported.
 
 **05.20.14** - A functional version of lyricist now exists.
