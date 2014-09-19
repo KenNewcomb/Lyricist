@@ -7,7 +7,6 @@ from modules import fetchLyrics
 if(len(sys.argv) >= 2):
                 Artist = sys.argv[1]
 		Title = sys.argv[2]
-		print(Artist, Title)
 		fetchLyrics.getLyrics([Artist,Title])
 
 # If no parameters are given, get current song from operating system.
