@@ -5,7 +5,7 @@ Lyricist displays the lyrics of the currently playing song in <a href="http://en
 
 News
 ----
-**09.15.14** - Development has resumed.
+**09.15.14** - Development has resumed. I am in the process of converting Lyricist to Python 3.
 
 **05.26.14** - SongLyrics.com is now supported.
 
