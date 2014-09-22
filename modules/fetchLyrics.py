@@ -12,7 +12,6 @@ def getLyrics(song):
 
 def AZLyrics(song):
 	"""Fetches lyrics from AZLyrics.com"""
-
 	# Prepare artist and title for lyrics search.
 	artist = nopunc(song[0].replace('The', '')).lower()
 	title = nopunc(song[1]).lower()

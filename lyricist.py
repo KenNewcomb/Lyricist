@@ -13,11 +13,17 @@ if(len(sys.argv) >= 2):
 # If no command line parameters are given, get current song from operating system.
 
 else:
-	song = nowPlaying.getSong()
-	fetchLyrics.getLyrics(song)
+	player = nowPlaying.getPID()
 
-	while True:
-		if song != nowPlaying.getSong():
-			song = nowPlaying.getSong() 
-			fetchLyrics.getLyrics(song)
-		time.sleep(1)
+	if not player:
+		print("No song is currently playing, or the music player is not supported.")
+		sys.exit()
+	else:
+		song = nowPlaying.getSong(player)
+		fetchLyrics.getLyrics(song)
+
+		while True:
+			if song != nowPlaying.getSong(player):
+				song = nowPlaying.getSong(player) 
+				fetchLyrics.getLyrics(song)
+			time.sleep(1)
