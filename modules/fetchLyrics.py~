@@ -28,7 +28,7 @@ def AZLyrics(song):
 		print("AZLyrics: No lyrics found...\n")
 		return False
 
-	raw_lyrics = lyrics.read().decode(('utf-8')).split('<!-- start of lyrics -->')[1]
+	raw_lyrics = lyrics.read().split('<!-- start of lyrics -->')[1]
 	lyrics = raw_lyrics.split('<!-- end of lyrics -->')[0]
 	
 	processed_lyrics = re.sub('<.*?>', '', lyrics)	
@@ -45,14 +45,14 @@ def SongLyrics(song):
 		
 	# Construct the lyrics URL
 	urlstring = "http://www.songlyrics.com/{0}/{1}-lyrics".format(artist,title)
-
+\
 	try:
 		lyrics = urllib.request.urlopen(urlstring)
 	except urllib.request.HTTPError:
 		print("SongLyrics: No lyrics found...\n")
 		return False
 	
-	raw_lyrics = lyrics.read().decode(('utf-8')).split("<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">")[1]
+	raw_lyrics = lyrics.read().split("<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">")[1]
 	lyrics = raw_lyrics.split("</div>")[0]
 	processed_lyrics = re.sub("<.*?>", "", lyrics).replace("&#039;", "'")
 	
@@ -64,9 +64,8 @@ def generateTitle(song):
 	Artist = song[0]
 	Title = song[1]
 	
-	title = ("{0} by {1}".format(Title, Artist))
-	print(title)
-
+	print("{0} by {1}".format(Title, Artist))
+	
 	for characters in title:
 		sys.stdout.write('-')		
 
