@@ -56,20 +56,25 @@ def SongLyrics(song):
 	# Construct the lyrics URL
 	urlstring = "http://www.songlyrics.com/{0}/{1}-lyrics".format(artist,title)
 	
-	# Fetch lyrics
+	# get the HTML at the proper URL
 	try:
 		lyrics = urllib.request.urlopen(urlstring)
 	except urllib.request.HTTPError:
 		print("SongLyrics: No lyrics found...\n")
-		return False
+		return (False, None)
+
+	# Extract lyrics from HTML
+	lyrics = lyrics.read().decode(('utf-8')).split("<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">")[1]
+	lyrics = lyrics.split("</div>")[0]
 	
-	raw_lyrics = lyrics.read().decode(('utf-8')).split("<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">")[1]
-	lyrics = raw_lyrics.split("</div>")[0]
-	processed_lyrics = re.sub("<.*?>", "", lyrics).replace("&#039;", "'")
+	# Remove HTML tags	
+	lyrics = re.sub("<.*?>", "", lyrics).replace("&#039;", "'")
 	
-	generateTitle(song)
-	print(processed_lyrics)
+	# Generate a title bar for the lyrics
+	title = generateTitle(song)
+	lyrics = title + lyrics
 	return True
+
 
 def generateTitle(song):
 	Artist = song[0]
