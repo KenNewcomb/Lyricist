@@ -7,8 +7,16 @@ import sys
 
 def getLyrics(song):
 	"""Attempts to gather lyrics from various sources."""
-	if(AZLyrics(song) != True):
-		SongLyrics(song)
+	foundlyrics = False
+	lyrics = None
+	
+	(foundlyrics, lyrics) =  AZLyrics(song)
+	if foundlyrics == True:
+		return lyrics
+	
+	(foundlyrics, lyrics) = SongLyrics(song)
+	if foundlyrics == True:
+		return lyrics	
 
 def AZLyrics(song):
 	"""Fetches lyrics from AZLyrics.com"""
@@ -20,31 +28,34 @@ def AZLyrics(song):
 	urlstring = "http://www.azlyrics.com/lyrics/{0}/{1}.html".format(artist, title)
 	
 	# get the HTML at the proper URL
-
 	try:
 		lyrics = urllib.request.urlopen(urlstring)
 	except urllib.request.HTTPError:
 		print("AZLyrics: No lyrics found...\n")
-		return False
+		return (False, None)
 
-	raw_lyrics = lyrics.read().decode(('utf-8')).split('<!-- start of lyrics -->')[1]
-	lyrics = raw_lyrics.split('<!-- end of lyrics -->')[0]
+	# Extract lyrics from HTML
+	lyrics = lyrics.read().decode(('utf-8')).split('<!-- start of lyrics -->')[1]
+	lyrics = lyrics.split('<!-- end of lyrics -->')[0]
 	
-	processed_lyrics = re.sub('<.*?>', '', lyrics)	
-	generateTitle(song)
+	# Remove HTML tags
+	lyrics = re.sub('<.*?>', '', lyrics)
 
-	print(processed_lyrics)
-	return True
+	title = generateTitle(song)
+	print("title" + title + " lyrics:" + lyrics)
+	lyrics = title + lyrics
+	return (True, lyrics)
 
 def SongLyrics(song):
 	"""Fetches lyrics from SongLyrics.com"""
-
+	# Prepare artist and title for lyrics search.
 	artist = song[0].replace('The', '').replace(" ", "-").lower()
 	title = song[1].replace(" ", "-").lower()
 		
 	# Construct the lyrics URL
 	urlstring = "http://www.songlyrics.com/{0}/{1}-lyrics".format(artist,title)
-
+	
+	# Fetch lyrics
 	try:
 		lyrics = urllib.request.urlopen(urlstring)
 	except urllib.request.HTTPError:
@@ -63,12 +74,10 @@ def generateTitle(song):
 	Artist = song[0]
 	Title = song[1]
 	
-	title = ("{0} by {1}".format(Title, Artist))
-	print(title)
-
+	title = ("{0} by {1}".format(Title, Artist) + '\n')
 	for characters in title:
-		sys.stdout.write('-')		
+		title = (title + '-')
 
-	print("\n")
+	return title
 def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
