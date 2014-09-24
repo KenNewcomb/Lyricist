@@ -23,7 +23,9 @@ def getSong(software):
 	elif(software[1] == 'rhythmbox'):
 		return Rhythmbox()
 
-### Program specific functions for obtaining Artist and Title.
+##############################################################
+# Program specific functions for obtaining Artist and Title  #
+##############################################################
 
 def Banshee():
 	"""Determines the currently playing song in Banshee."""

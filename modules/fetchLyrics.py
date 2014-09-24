@@ -81,6 +81,8 @@ def generateTitle(song):
 	Title = song[1]
 	
 	title = ("{0} by {1}".format(Title, Artist) + '\n')
+
+	# Generate a horizontal separator based on title length.
 	for characters in title:
 		title = (title + '-')
 
