@@ -1,10 +1,12 @@
 Lyricist
 ======
 
-Lyricist displays the lyrics of the currently playing song in <a href="http://en.wikipedia.org/wiki/Banshee_%28media_player%29" target="_blank">Banshee.</a>
+Lyricist prints the lyrics of the currently playing song to the shell. The program determines the currently playing song and scrapes various websites for lyrics.
 
 News
 ----
+**09.24.14** - Rhythmbox is currently supported.
+
 **09.15.14** - Development has resumed. I am in the process of converting Lyricist to Python 3.
 
 **05.26.14** - SongLyrics.com is now supported.
@@ -16,8 +18,15 @@ Supported sources:
 1. AZLyrics.com
 2. SongLyrics.com
 
+
+Supported Music Players:
+----------------------
+1. <a href="http://en.wikipedia.org/wiki/Banshee_%28media_player%29" target="_blank">Banshee</a>
+2. <a href="https://en.wikipedia.org/wiki/Rhythmbox" target="_blank">Rhythmbox</a>
+
+
 To be implemented:
----------------
+-----------------
 1. Support for other common media players
 2. Support for other sources of lyrics
 3. Improvements to the way Lyricist searches for lyrics. If a title includes superfluous words such as "feat." lyricist may not find any lyrics. 

@@ -8,11 +8,13 @@ def getPID():
 	"""Determines if a supported music player is currently running"""
 	processes = subprocess.check_output('ps -A', shell=True).decode()
 	software_list = ['banshee', 'rhythmbox']
+	process_exists = False
+	player = None
 	for software in software_list:
 		if software in processes:
-			return (True, software)
-		else:
-			return (False)
+			process_exists = True
+			player = software
+	return (process_exists, software)
 
 def getSong(software):
 	"""Calls the proper function to determine currently playing song."""
@@ -31,4 +33,6 @@ def Banshee():
 
 def Rhythmbox():
 	"""Determines the currently playing song in Rhythmbox."""
-	pass
+	Artist = subprocess.check_output('rhythmbox-client --no-start --print-playing-format %aa', shell=True).decode()
+	Title = subprocess.check_output('rhythmbox-client --no-start --print-playing-format %tt', shell=True).decode()
+	return (Artist, Title)
