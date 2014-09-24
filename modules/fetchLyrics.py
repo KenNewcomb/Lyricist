@@ -40,10 +40,11 @@ def AZLyrics(song):
 	
 	# Remove HTML tags
 	lyrics = re.sub('<.*?>', '', lyrics)
-
+	
+	# Generate a title bar for the lyrics.
 	title = generateTitle(song)
-	print("title" + title + " lyrics:" + lyrics)
 	lyrics = title + lyrics
+
 	return (True, lyrics)
 
 def SongLyrics(song):
