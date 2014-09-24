@@ -14,7 +14,7 @@ def getPID():
 		if software in processes:
 			process_exists = True
 			player = software
-	return (process_exists, software)
+	return (process_exists, player)
 
 def getSong(software):
 	"""Calls the proper function to determine currently playing song."""
