@@ -86,6 +86,7 @@ def generateTitle(song):
 	for characters in title:
 		title = (title + '-')
 
+	title = title + "\n"
 	return title
 def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
