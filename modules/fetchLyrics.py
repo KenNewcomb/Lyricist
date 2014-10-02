@@ -73,7 +73,7 @@ def SongLyrics(song):
 	# Generate a title bar for the lyrics
 	title = generateTitle(song)
 	lyrics = title + lyrics
-	return True
+	return (True, lyrics)
 
 
 def generateTitle(song):
