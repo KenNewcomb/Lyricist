@@ -11,7 +11,7 @@ if(len(sys.argv) == 1):
 
 	player = nowPlaying.getPID()
 
-	if not player:
+	if not player[0]:
 		print("No song is currently playing, or the music player is not supported.")
 		sys.exit()
 	else:
