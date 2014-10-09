@@ -1,7 +1,7 @@
 Lyricist
 ======
 
-Lyricist prints the lyrics of the currently playing song to the shell. The program determines the currently playing song and scrapes various websites for lyrics.
+Lyricist prints the lyrics of the currently playing song to the shell. The program grabs the track information from the operating system and scrapes various websites for lyrics.
 
 News
 ----
