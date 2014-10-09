@@ -18,7 +18,7 @@ def getLyrics(song):
 	if foundlyrics == True:
 		return lyrics
 	
-	return("No lyrics found for " + song)
+	return("No lyrics found for " + song[1])
 
 def AZLyrics(song):
 	"""Fetches lyrics from AZLyrics.com"""
