@@ -31,19 +31,10 @@ def Banshee():
 	"""Determines the currently playing song in Banshee."""
 	Artist = subprocess.check_output('banshee --query-artist', shell=True).decode().replace('artist: ', '').replace('\n', '')
 	Title = subprocess.check_output('banshee --query-title', shell=True).decode().replace('title: ', '').replace('\n', '')
-	Title = deFeat(Title)
 	return [Artist, Title]
 
 def Rhythmbox():
 	"""Determines the currently playing song in Rhythmbox."""
 	Artist = subprocess.check_output('rhythmbox-client --no-start --print-playing-format %aa', shell=True).decode()
 	Title = subprocess.check_output('rhythmbox-client --no-start --print-playing-format %tt', shell=True).decode()
-	Title = deFeat(Title)
 	return [Artist, Title]
-
-def deFeat(title):
-	"Removes the 'feat' or 'live' statement in song titles"
-	statements = [' (feat', ' feat', ' f.', ' (f.', ' (Live', ' (live']
-	for statement in statements:
-		title = title.split(statement)[0]
-	return title

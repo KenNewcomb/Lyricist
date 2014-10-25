@@ -9,8 +9,6 @@ def getLyrics(song):
 	"""Attempts to gather lyrics from various sources."""
 	foundlyrics = False
 	lyrics = None
-	
-	song = deFeat(song)
 
 	(foundlyrics, lyrics) =  AZLyrics(song)
 	if foundlyrics == True:
@@ -94,10 +92,3 @@ def generateTitle(song):
 	return title
 def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
-
-def deFeat(song):
-	"Removes the 'feat' or 'live' statement in song titles"
-	statements = [' (feat', ' feat', ' f.', ' (f.', ' (Live', ' (live']
-	for statement in statements:
-		song[1] = song[1].split(statement)[0]
-	return song
