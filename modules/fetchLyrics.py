@@ -96,9 +96,8 @@ def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
 
 def deFeat(song):
-	"Removes the ""Featuring:"" statement in song titles"
-	fixed_song = song[1].split(' (feat')[0]
-	fixed_song = fixed_song.split(' feat')[0]
-	fixed_song = fixed_song.split(' f.')[0]
-	fixed_song = fixed_song.split(' (f.')[0]
-	return [song[0], fixed_song]
+	"Removes the 'feat' or 'live' statement in song titles"
+	statements = [' (feat', ' feat', ' f.', ' (f.', ' (Live', ' (live']
+	for statement in statements:
+		song[1] = song[1].split(statement)[0]
+	return song

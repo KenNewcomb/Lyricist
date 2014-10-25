@@ -31,10 +31,10 @@ def Banshee():
 	"""Determines the currently playing song in Banshee."""
 	Artist = subprocess.check_output('banshee --query-artist', shell=True).decode().replace('artist: ', '').replace('\n', '')
 	Title = subprocess.check_output('banshee --query-title', shell=True).decode().replace('title: ', '').replace('\n', '')
-	return (Artist, Title)
+	return [Artist, Title]
 
 def Rhythmbox():
 	"""Determines the currently playing song in Rhythmbox."""
 	Artist = subprocess.check_output('rhythmbox-client --no-start --print-playing-format %aa', shell=True).decode()
 	Title = subprocess.check_output('rhythmbox-client --no-start --print-playing-format %tt', shell=True).decode()
-	return (Artist, Title)
+	return [Artist, Title]
