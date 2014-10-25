@@ -10,6 +10,8 @@ def getLyrics(song):
 	foundlyrics = False
 	lyrics = None
 	
+	song = deFeat(song)
+
 	(foundlyrics, lyrics) =  AZLyrics(song)
 	if foundlyrics == True:
 		return lyrics
@@ -92,3 +94,11 @@ def generateTitle(song):
 	return title
 def nopunc(s):
     return ''.join(e for e in s if e.isalnum())
+
+def deFeat(song):
+	"Removes the ""Featuring:"" statement in song titles"
+	fixed_song = song[1].split(' (feat')[0]
+	fixed_song = fixed_song.split(' feat')[0]
+	fixed_song = fixed_song.split(' f.')[0]
+	fixed_song = fixed_song.split(' (f.')[0]
+	return [song[0], fixed_song]
